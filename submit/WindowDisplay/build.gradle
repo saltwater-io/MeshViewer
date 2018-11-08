@@ -1,0 +1,20 @@
+apply plugin: 'idea'
+apply plugin: 'java'
+apply plugin: 'application'
+
+sourceCompatibility = 1.8
+mainClassName = 'WindowViewer'
+
+
+jar {
+    manifest {
+        attributes 'Main-Class': mainClassName
+    }
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'jogl\\jar', include: ['*.jar'])
+}
